@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  netlab:
+    build: .
+    container_name: network-testing-sandbox
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./logs:/workspace/logs
+      - ./scripts:/workspace/scripts
+      - ./config:/workspace/config
+    network_mode: bridge
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    restart: "no"
